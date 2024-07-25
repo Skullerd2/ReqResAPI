@@ -52,6 +52,7 @@
 		A57234A72C4EA9980098BD96 = {
 			isa = PBXGroup;
 			children = (
+				A5ACEB402C528D7700B86DC7 /* .gitignore */,
 				A57234B22C4EA9980098BD96 /* ReqResAppIos */,
 				A57234B12C4EA9980098BD96 /* Products */,
 			);
@@ -68,11 +69,10 @@
 		A57234B22C4EA9980098BD96 /* ReqResAppIos */ = {
 			isa = PBXGroup;
 			children = (
+				A57234D22C513CF10098BD96 /* UserTableViewCell.swift */,
 				A57234B32C4EA9980098BD96 /* AppDelegate.swift */,
 				A57234B52C4EA9980098BD96 /* SceneDelegate.swift */,
 				A57234CB2C4EAABD0098BD96 /* UsersListViewController.swift */,
-				A5ACEB402C528D7700B86DC7 /* .gitignore */,
-				A57234D22C513CF10098BD96 /* UserTableViewCell.swift */,
 				A57234D02C5105FB0098BD96 /* UserViewController.swift */,
 				A57234CF2C4FE2F90098BD96 /* Services */,
 				A57234C82C4EA9DC0098BD96 /* Models */,
