@@ -18,6 +18,7 @@
 		A57234D12C5105FB0098BD96 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57234D02C5105FB0098BD96 /* UserViewController.swift */; };
 		A57234D32C513CF10098BD96 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57234D22C513CF10098BD96 /* UserTableViewCell.swift */; };
 		A5ACEB3E2C5148F400B86DC7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A5ACEB3D2C5148F400B86DC7 /* Kingfisher */; };
+		A5ACEB412C528D7700B86DC7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A5ACEB402C528D7700B86DC7 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		A57234CD2C4EB07C0098BD96 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A57234D02C5105FB0098BD96 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		A57234D22C513CF10098BD96 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		A5ACEB402C528D7700B86DC7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				A57234B32C4EA9980098BD96 /* AppDelegate.swift */,
 				A57234B52C4EA9980098BD96 /* SceneDelegate.swift */,
 				A57234CB2C4EAABD0098BD96 /* UsersListViewController.swift */,
+				A5ACEB402C528D7700B86DC7 /* .gitignore */,
 				A57234D22C513CF10098BD96 /* UserTableViewCell.swift */,
 				A57234D02C5105FB0098BD96 /* UserViewController.swift */,
 				A57234CF2C4FE2F90098BD96 /* Services */,
@@ -169,6 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5ACEB412C528D7700B86DC7 /* .gitignore in Resources */,
 				A57234BD2C4EA99E0098BD96 /* Assets.xcassets in Resources */,
 				A57234C02C4EA99E0098BD96 /* Base in Resources */,
 				A57234BB2C4EA9980098BD96 /* Base in Resources */,
