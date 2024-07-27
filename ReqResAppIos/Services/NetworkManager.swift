@@ -16,6 +16,18 @@ final class NetworkManager{
     enum NetworkError: Error{
         case noData
         case decodingError
+        case noUsers
+        
+        var title: String{
+            switch self {
+            case .noData:
+                return "Can't decode received data"
+            case .decodingError:
+                return "Can't fetch data at all"
+            case .noUsers:
+                return "No users got from API"
+            }
+        }
     }
     
     func fetchAvatar(from url: URL, completion: @escaping(Data) -> Void) {
@@ -30,27 +42,30 @@ final class NetworkManager{
     
     func fetchUsers(completion: @escaping (Result<[User], NetworkError>) -> Void) {
         URLSession.shared.dataTask(with: Link.allUsers.url) { data, response, error in
-            if let response = response as? HTTPURLResponse{
-                print("response status code: \(response.statusCode)")
-            }
-            
-            guard let data else {
-                print( error?.localizedDescription ?? "No error description")
+            guard let data, let response = response as? HTTPURLResponse else{
+                print(error?.localizedDescription ?? "No error description")
                 sendFailure(with: .noData)
                 return
             }
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
             
-            do{
-                let usersQuery =  try decoder.decode(UsersQuery.self, from: data)
-                DispatchQueue.main.async{
-                    completion(.success(usersQuery.data))
+            if (200...299).contains(response.statusCode){
+                
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                
+                do{
+                    let usersQuery =  try decoder.decode(UsersQuery.self, from: data)
+                    DispatchQueue.main.async{
+                        if usersQuery.data.count == 0{
+                            sendFailure(with: .noUsers)
+                            return
+                        }
+                        completion(.success(usersQuery.data))
+                    }
+                } catch {
+                    sendFailure(with: .decodingError)
                 }
-            } catch {
-                sendFailure(with: .decodingError)
             }
-            
             func sendFailure(with error: NetworkError) {
                 DispatchQueue.main.async {
                     completion(.failure(error))
@@ -64,11 +79,20 @@ final class NetworkManager{
 extension NetworkManager {
     enum Link{
         case allUsers
+        case withNoData
+        case withDecodingError
+        case withNoUsers
         
         var url: URL {
             switch self{
             case .allUsers:
+                return URL(string: "https://reqres.in/api/users/?delay=2")!
+            case .withNoData:
                 return URL(string: "https://reqres.in/api/users")!
+            case .withDecodingError:
+                return URL(string: "https://reqres.in/api/users/3?delay=2")!
+            case .withNoUsers:
+                return URL(string: "https://reqres.in/api/users/?delay=2&page=3")!
             }
         }
     }
