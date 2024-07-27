@@ -19,6 +19,7 @@
 		A57234D32C513CF10098BD96 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57234D22C513CF10098BD96 /* UserTableViewCell.swift */; };
 		A5ACEB3E2C5148F400B86DC7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A5ACEB3D2C5148F400B86DC7 /* Kingfisher */; };
 		A5ACEB412C528D7700B86DC7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A5ACEB402C528D7700B86DC7 /* .gitignore */; };
+		A5ACEB442C54F03200B86DC7 /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACEB432C54F03200B86DC7 /* NewUserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		A57234D02C5105FB0098BD96 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		A57234D22C513CF10098BD96 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		A5ACEB402C528D7700B86DC7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A5ACEB432C54F03200B86DC7 /* NewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				A57234D22C513CF10098BD96 /* UserTableViewCell.swift */,
 				A57234D02C5105FB0098BD96 /* UserViewController.swift */,
 				A57234CB2C4EAABD0098BD96 /* UsersListViewController.swift */,
+				A5ACEB432C54F03200B86DC7 /* NewUserViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				A57234CC2C4EAABD0098BD96 /* UsersListViewController.swift in Sources */,
 				A57234CE2C4EB07C0098BD96 /* NetworkManager.swift in Sources */,
 				A57234CA2C4EA9F80098BD96 /* User.swift in Sources */,
+				A5ACEB442C54F03200B86DC7 /* NewUserViewController.swift in Sources */,
 				A57234B62C4EA9980098BD96 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

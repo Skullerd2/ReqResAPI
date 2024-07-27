@@ -73,12 +73,36 @@ final class NetworkManager{
             }
         }.resume()
     }
+    
+    func postUser(_ user: User, completion: @escaping (Result<PostUserQuery, NetworkError>) -> Void){
+        var request = URLRequest(url: Link.singleUser.url)
+        request.httpMethod = "POST"
+        
+        let userQuery = PostUserQuery(firstName: user.firstName, lastName: user.lastName)
+        
+        let jsonData = try? JSONEncoder().encode(userQuery)
+        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data else { return }
+            
+            if let postUserQuery = try? JSONDecoder().decode(PostUserQuery.self, from: data) {
+                DispatchQueue.main.async {
+                    completion(.success(postUserQuery))
+                }
+            } else {
+                completion(.failure(.decodingError))
+            }
+        }.resume()
+    }
 }
 
 // MARK: - Link
 extension NetworkManager {
     enum Link{
         case allUsers
+        case singleUser
         case withNoData
         case withDecodingError
         case withNoUsers
@@ -87,6 +111,8 @@ extension NetworkManager {
             switch self{
             case .allUsers:
                 return URL(string: "https://reqres.in/api/users/?delay=2")!
+            case .singleUser:
+                return URL(string: "https://reqres.in/api/users/")!
             case .withNoData:
                 return URL(string: "https://reqres.in/api/users")!
             case .withDecodingError:

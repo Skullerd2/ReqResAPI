@@ -58,11 +58,68 @@
                             <outlet property="delegate" destination="BSU-5a-oA9" id="cPf-I0-fX9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="ARz-3W-zDX"/>
+                    <navigationItem key="navigationItem" title="Title" id="ARz-3W-zDX">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="S8w-nk-xec">
+                            <connections>
+                                <segue destination="Gio-NT-Ado" kind="showDetail" identifier="newUser" id="kId-qj-GlW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MnS-eG-eMr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1008.3969465648854" y="24.647887323943664"/>
+        </scene>
+        <!--New user-->
+        <scene sceneID="M3t-Qu-wRu">
+            <objects>
+                <viewController id="nMU-Fm-1s3" customClass="NewUserViewController" customModule="ReqResAppIos" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="C02-2t-gel">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3nw-IR-lWB">
+                                <rect key="frame" x="10" y="118" width="373" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rt9-nf-SFb">
+                                <rect key="frame" x="10" y="167" width="373" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WFI-Ky-Rch"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3nw-IR-lWB" firstAttribute="leading" secondItem="WFI-Ky-Rch" secondAttribute="leading" constant="10" id="G1N-Dy-6io"/>
+                            <constraint firstItem="Rt9-nf-SFb" firstAttribute="top" secondItem="3nw-IR-lWB" secondAttribute="bottom" constant="15" id="Pw1-pG-h48"/>
+                            <constraint firstItem="WFI-Ky-Rch" firstAttribute="trailing" secondItem="Rt9-nf-SFb" secondAttribute="trailing" constant="10" id="hME-Oa-Ss5"/>
+                            <constraint firstItem="Rt9-nf-SFb" firstAttribute="leading" secondItem="WFI-Ky-Rch" secondAttribute="leading" constant="10" id="lWD-ci-Ejb"/>
+                            <constraint firstItem="3nw-IR-lWB" firstAttribute="top" secondItem="WFI-Ky-Rch" secondAttribute="top" constant="15" id="nWc-jc-uzY"/>
+                            <constraint firstItem="WFI-Ky-Rch" firstAttribute="trailing" secondItem="3nw-IR-lWB" secondAttribute="trailing" constant="10" id="ubI-oX-TR5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="New user" id="sOS-4e-NI7">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="qEy-yA-reR">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="nMU-Fm-1s3" id="7AM-f1-BTB"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="leo-YI-Gkv">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="nMU-Fm-1s3" id="NZB-h9-q4u"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="firstNameTextField" destination="3nw-IR-lWB" id="pKB-vX-DSe"/>
+                        <outlet property="lastNameTextField" destination="Rt9-nf-SFb" id="QoL-50-MXC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i1i-jT-JYC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1813" y="777"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="f9q-R3-TZx">
@@ -121,6 +178,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JZe-Cj-6cK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="81.679389312977094" y="24.647887323943664"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Eiy-fn-Xgq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gio-NT-Ado" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G1F-6i-1rd">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nMU-Fm-1s3" kind="relationship" relationship="rootViewController" id="gyq-D0-Rvx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ic2-Ml-C9x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1008" y="777"/>
         </scene>
     </scenes>
     <resources>

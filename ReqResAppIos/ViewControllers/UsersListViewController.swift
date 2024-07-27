@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol NewUserViewControllerDelegate{
+    func createUser(user: User)
+}
+
 final class UsersListViewController: UITableViewController{
     
     private let networkManager = NetworkManager.shared
@@ -23,10 +27,16 @@ final class UsersListViewController: UITableViewController{
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        let user = users[indexPath.row]
-        let userVC = segue.destination as? UserViewController
-        userVC?.user = user
+        if segue.identifier == "showUser"{
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let user = users[indexPath.row]
+            let userVC = segue.destination as? UserViewController
+            userVC?.user = user
+        } else if segue.identifier == "newUser" {
+            let navigationVC = segue.destination as? UINavigationController
+            let newUserVC = navigationVC?.topViewController as? NewUserViewController
+            newUserVC?.delegate = self
+        }
     }
     
     // MARK: - Private methods
@@ -102,5 +112,15 @@ extension UsersListViewController {
 //        }
         
         return cell
+    }
+}
+
+// MARK: - NewUserViewControlledDelegate
+
+extension UsersListViewController: NewUserViewControllerDelegate{
+    func createUser(user: User){
+        print(user)
+        users.append(user)
+        tableView.reloadData()
     }
 }
