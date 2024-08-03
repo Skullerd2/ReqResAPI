@@ -115,6 +115,18 @@ final class NetworkManager{
         }
     }
     
+    func deleteUserWithId(_ id: Int) async throws -> Bool {
+        let userURL = Link.singleUser.url.appending(component: "\(id)")
+        var request = URLRequest(url: userURL)
+        request.httpMethod = "DELETE"
+        
+        let (_, response) =  try await URLSession.shared.data(for: request)
+        
+        if let response = response as? HTTPURLResponse {
+            return response.statusCode == 204
+        }
+        return false
+    }
 }
 
 // MARK: - Link
