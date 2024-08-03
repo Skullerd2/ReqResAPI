@@ -77,6 +77,30 @@ extension UsersListViewController{
             self?.tableView.reloadData()
         }
     }
+    
+    private func post(user: User) {
+        networkManager.postUser(user) { [weak self] result in
+            switch result {
+            case .success(let postUserQuery):
+                print("\(postUserQuery) created")
+                self?.users.append(User(postUserQuery: postUserQuery))
+                self?.tableView.reloadData()
+            case .failure(let error):
+                print("Error in post user: \(error)")
+            }
+        }
+    }
+    
+    private func deleteUserWith(id: Int, at indexPath: IndexPath){
+        networkManager.deleteUserWith(id) { [weak self] successfully in
+            if successfully{
+                print("user with id \(id) deleted from API")
+                self?.users.remove(at: indexPath.row)
+                self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                self?.showAlert(withError: .deletingError)
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -113,14 +137,19 @@ extension UsersListViewController {
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            let user = users[indexPath.row]
+            deleteUserWith(id: user.id, at: indexPath)
+        }
+    }
 }
 
 // MARK: - NewUserViewControlledDelegate
 
 extension UsersListViewController: NewUserViewControllerDelegate{
     func createUser(user: User){
-        print(user)
-        users.append(user)
-        tableView.reloadData()
+        post(user: user)
     }
 }

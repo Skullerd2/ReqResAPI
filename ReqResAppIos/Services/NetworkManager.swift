@@ -17,6 +17,7 @@ final class NetworkManager{
         case noData
         case decodingError
         case noUsers
+        case deletingError
         
         var title: String{
             switch self {
@@ -26,6 +27,9 @@ final class NetworkManager{
                 return "Can't fetch data at all"
             case .noUsers:
                 return "No users got from API"
+            case .deletingError:
+                return "Can't delete user"
+            
             }
         }
     }
@@ -96,6 +100,21 @@ final class NetworkManager{
             }
         }.resume()
     }
+    
+    func deleteUserWith(_ id: Int, completion: @escaping (Bool) -> Void){
+        let userURL = Link.singleUser.url.appending(component: "\(id)")
+        var request = URLRequest(url: userURL)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let response = response as? HTTPURLResponse{
+                DispatchQueue.main.async {
+                    completion(response.statusCode == 204)
+                }
+            }
+        }
+    }
+    
 }
 
 // MARK: - Link

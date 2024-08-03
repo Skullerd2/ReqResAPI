@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewUserViewController: UIViewController {
+final class NewUserViewController: UIViewController {
 
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -19,7 +19,7 @@ class NewUserViewController: UIViewController {
     
     @IBAction func doneButtonTapped(_ sender: Any) {
         let user = User(id: 0, firstName: firstNameTextField.text ?? "", lastName: lastNameTextField.text ?? "", avatar:  nil)
-        post(user: user)
+        self.delegate?.createUser(user: user)
         dismiss(animated: true)
     }
     
@@ -29,17 +29,4 @@ class NewUserViewController: UIViewController {
     
 }
 
-// MARK: - Networking
-extension NewUserViewController{
-    private func post(user: User) {
-        networkManager.postUser(user) { result in
-            switch result {
-            case .success(let postUserQuery):
-                print("\(postUserQuery) created")
-                self.delegate?.createUser(user: User(postUserQuery: postUserQuery))
-            case .failure(let error):
-                print("Error in post user: \(error)")
-            }
-        }
-    }
-}
+
