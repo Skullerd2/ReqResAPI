@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 protocol NewUserViewControllerDelegate{
     func createUser(user: User)
@@ -40,8 +41,8 @@ final class UsersListViewController: UITableViewController{
     }
     
     // MARK: - Private methods
-    private func showAlert(withError networkError: NetworkManager.NetworkError){
-        let alert = UIAlertController(title: networkError.title, message: nil, preferredStyle: .alert)
+    private func showAlert(withError networkError: AFError){
+        let alert = UIAlertController(title: networkError.localizedDescription, message: nil, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
         present(alert, animated: true)
@@ -92,22 +93,14 @@ extension UsersListViewController{
     }
     
     private func deleteUserWith(id: Int, at indexPath: IndexPath){
-        //        networkManager.deleteUserWith(id) { [weak self] successfully in
-        //            if successfully{
-        //                print("user with id \(id) deleted from API")
-        //                self?.users.remove(at: indexPath.row)
-        //                self?.tableView.deleteRows(at: [indexPath], with: .automatic)
-        //                self?.showAlert(withError: .deletingError)
-        //            }
-        //        }
-        Task{
-            if try await networkManager.deleteUserWithId(id) {
-                users.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            } else{
-                showAlert(withError: .deletingError)
-            }
-        }
+                networkManager.deleteUserWith(id) { [weak self] successfully in
+                    if successfully{
+                        print("user with id \(id) deleted from API")
+                        self?.users.remove(at: indexPath.row)
+                        self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                        self?.showAlert(withError: .explicitlyCancelled)
+                    }
+                }
     }
 }
 
